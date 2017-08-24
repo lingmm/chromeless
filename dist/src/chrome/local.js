@@ -82,6 +82,7 @@ var LocalChrome = (function () {
                         return [4 /*yield*/, chrome_launcher_1.launch({
                                 logLevel: this.options.debug ? 'info' : 'silent',
                                 port: this.options.cdp.port,
+                                chromeFlags: this.options.chromeFlags || [],
                             })];
                     case 1:
                         _a.chromeInstance = _b.sent();

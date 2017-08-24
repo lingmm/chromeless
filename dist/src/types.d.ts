@@ -42,6 +42,7 @@ export interface ChromelessOptions {
         height?: number;
         scale?: number;
     };
+    chromeFlags?: string[];
     launchChrome?: boolean;
     cdp?: CDPOptions;
     remote?: RemoteOptions | boolean;
