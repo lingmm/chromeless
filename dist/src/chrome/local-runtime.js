@@ -548,12 +548,12 @@ var LocalRuntime = (function () {
         });
     };
     // Returns the S3 url or local file path
-    LocalRuntime.prototype.returnScreenshot = function () {
+    LocalRuntime.prototype.returnScreenshot = function (opts) {
         return __awaiter(this, void 0, void 0, function () {
             var data, prefix, s3Path, s3, filePath;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, util_1.screenshot(this.client)
+                    case 0: return [4 /*yield*/, util_1.screenshot(this.client, opts)
                         // check if S3 configured
                     ];
                     case 1:

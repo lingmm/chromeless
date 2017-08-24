@@ -217,9 +217,10 @@ export default class Chromeless<T extends any> implements Promise<T> {
     return new Chromeless<boolean>({}, this)
   }
 
-  screenshot(): Chromeless<string> {
+  screenshot(opts?: any): Chromeless<string> {
     this.lastReturnPromise = this.queue.process<string>({
       type: 'returnScreenshot',
+      opts,
     })
 
     return new Chromeless<string>({}, this)

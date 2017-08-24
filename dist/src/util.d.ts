@@ -21,7 +21,7 @@ export declare function mousedown(client: Client, selector: string, scale: numbe
 export declare function mouseup(client: Client, selector: string, scale: number): Promise<void>;
 export declare function deleteCookie(client: Client, name: string, url: string): Promise<void>;
 export declare function clearCookies(client: Client): Promise<void>;
-export declare function screenshot(client: Client): Promise<string>;
+export declare function screenshot(client: Client, opts?: any): Promise<string>;
 export declare function html(client: Client): Promise<string>;
 export declare function pdf(client: Client, options?: PdfOptions): Promise<string>;
 export declare function clearInput(client: Client, selector: string): Promise<void>;

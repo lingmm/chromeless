@@ -27,7 +27,7 @@ export default class LocalRuntime {
     press(keyCode: number, count?: number, modifiers?: any): Promise<void>;
     returnExists(selector: string): Promise<boolean>;
     returnInputValue(selector: string): Promise<string>;
-    returnScreenshot(): Promise<string>;
+    returnScreenshot(opts?: any): Promise<string>;
     returnHtml(): Promise<string>;
     returnPdf(options?: PdfOptions): Promise<string>;
     clearInput(selector: string): Promise<void>;

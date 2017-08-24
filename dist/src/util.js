@@ -614,14 +614,14 @@ function clearCookies(client) {
     });
 }
 exports.clearCookies = clearCookies;
-function screenshot(client) {
+function screenshot(client, opts) {
     return __awaiter(this, void 0, void 0, function () {
         var Page, screenshot;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     Page = client.Page;
-                    return [4 /*yield*/, Page.captureScreenshot({ format: 'png' })];
+                    return [4 /*yield*/, Page.captureScreenshot(__assign({ format: 'png' }, opts))];
                 case 1:
                     screenshot = _a.sent();
                     return [2 /*return*/, screenshot.data];

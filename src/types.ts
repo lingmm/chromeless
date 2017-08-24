@@ -103,7 +103,8 @@ export type Command =
       selector: string
     }
   | {
-      type: 'returnScreenshot'
+      type: 'returnScreenshot',
+      opts: any
     }
   | {
       type: 'returnHtml'

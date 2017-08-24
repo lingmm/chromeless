@@ -86,6 +86,7 @@ export declare type Command = {
     selector: string;
 } | {
     type: 'returnScreenshot';
+    opts: any;
 } | {
     type: 'returnHtml';
 } | {

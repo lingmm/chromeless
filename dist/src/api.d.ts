@@ -29,7 +29,7 @@ export default class Chromeless<T extends any> implements Promise<T> {
     evaluate<U extends any>(fn: (...args: any[]) => void, ...args: any[]): Chromeless<U>;
     inputValue(selector: string): Chromeless<string>;
     exists(selector: string): Chromeless<boolean>;
-    screenshot(): Chromeless<string>;
+    screenshot(opts?: any): Chromeless<string>;
     html(): Chromeless<string>;
     pdf(options?: PdfOptions): Chromeless<string>;
     /**
