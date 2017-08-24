@@ -76,7 +76,7 @@ export default class LocalRuntime {
       case 'returnExists':
         return this.returnExists(command.selector)
       case 'returnScreenshot':
-        return this.returnScreenshot()
+        return this.returnScreenshot(command.opts)
       case 'returnHtml':
         return this.returnHtml()
       case 'returnPdf':

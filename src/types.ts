@@ -104,7 +104,7 @@ export type Command =
     }
   | {
       type: 'returnScreenshot',
-      opts: any
+      opts?: any
     }
   | {
       type: 'returnHtml'
