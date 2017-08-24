@@ -102,7 +102,11 @@ export default class LocalChrome implements Chrome {
     const { client } = await this.runtimeClientPromise
 
     if (this.options.cdp.closeTab) {
-      await CDP.Close({ id: client.target.id })
+      if (client.target.id) {
+        await CDP.Close({ id: client.target.id })
+      } else {
+        await CDP.Close({ id: /.+\/(.+)$/.exec((client as any).webSocketUrl)[1] })
+      }
     }
 
     if (this.chromeInstance) {
