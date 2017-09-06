@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import * as util from 'util'
 import { Client, Cookie, DeviceMetrics, PdfOptions } from './types'
 import * as CDP from 'chrome-remote-interface'
 
@@ -201,8 +202,8 @@ export async function evaluate<T>(
 
   if (result && result.exceptionDetails) {
     throw new Error(
-      result.exceptionDetails.exception.value ||
-        result.exceptionDetails.exception.description,
+      (result.exceptionDetails.exception.value && util.inspect(result.exceptionDetails.exception.value, false, 5, false)) ||
+      util.inspect(result.exceptionDetails.exception.description, false, 5, false),
     )
   }
 

@@ -45,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var path = require("path");
+var util = require("util");
 var CDP = require("chrome-remote-interface");
 exports.version = (function () {
     if (fs.existsSync(path.join(__dirname, '../package.json'))) {
@@ -299,8 +300,8 @@ function evaluate(client, fn) {
                 case 1:
                     result = _a.sent();
                     if (result && result.exceptionDetails) {
-                        throw new Error(result.exceptionDetails.exception.value ||
-                            result.exceptionDetails.exception.description);
+                        throw new Error((result.exceptionDetails.exception.value && util.inspect(result.exceptionDetails.exception.value, false, 5, false)) ||
+                            util.inspect(result.exceptionDetails.exception.description, false, 5, false));
                     }
                     if (result && result.result) {
                         return [2 /*return*/, result.result.value];
