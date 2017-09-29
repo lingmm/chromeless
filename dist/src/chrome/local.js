@@ -91,7 +91,10 @@ var LocalChrome = (function () {
                             })];
                     case 2:
                         target = _b.sent();
-                        return [4 /*yield*/, CDP({ target: target })];
+                        return [4 /*yield*/, CDP({
+                                target: target,
+                                port: this.chromeInstance.port,
+                            })];
                     case 3: return [2 /*return*/, _b.sent()];
                 }
             });
@@ -108,7 +111,11 @@ var LocalChrome = (function () {
                         })];
                     case 1:
                         target = _a.sent();
-                        return [4 /*yield*/, CDP({ target: target })];
+                        return [4 /*yield*/, CDP({
+                                target: target,
+                                port: this.options.cdp.port,
+                                host: this.options.cdp.host,
+                            })];
                     case 2: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -190,11 +197,17 @@ var LocalChrome = (function () {
                         client = (_a.sent()).client;
                         if (!this.options.cdp.closeTab) return [3 /*break*/, 5];
                         if (!client.target.id) return [3 /*break*/, 3];
-                        return [4 /*yield*/, CDP.Close({ id: client.target.id })];
+                        return [4 /*yield*/, CDP.Close({
+                                port: this.options.cdp.port,
+                                id: client.target.id
+                            })];
                     case 2:
                         _a.sent();
                         return [3 /*break*/, 5];
-                    case 3: return [4 /*yield*/, CDP.Close({ id: /.+\/(.+)$/.exec(client.webSocketUrl)[1] })];
+                    case 3: return [4 /*yield*/, CDP.Close({
+                            port: this.options.cdp.port,
+                            id: /.+\/(.+)$/.exec(client.webSocketUrl)[1]
+                        })];
                     case 4:
                         _a.sent();
                         _a.label = 5;
