@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as os from 'os'
+import * as url from 'url'
 import * as path from 'path'
 import * as cuid from 'cuid'
 import { Client, Cookie, DeviceMetrics, PdfOptions, BoxModel, Viewport } from './types'
@@ -26,8 +27,8 @@ export async function setViewport(
     scale: viewport.scale || 1,
     fitWindow: false, // as we cannot resize the window, `fitWindow: false` is needed in order for the viewport to be resizable
   }
-
-  const versionResult = await CDP.Version()
+  const { hostname, port } = url.parse((client as any).webSocketUrl)
+  const versionResult = await CDP.Version({ host: hostname, port })
   const isHeadless = versionResult['User-Agent'].includes('Headless')
 
   if (viewport.height && viewport.width) {
