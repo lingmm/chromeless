@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as util from 'util'
+import * as url from 'url'
 import { Client, Cookie, DeviceMetrics, PdfOptions } from './types'
 import * as CDP from 'chrome-remote-interface'
 
@@ -16,7 +17,7 @@ export const version: string = ((): string => {
 
 export async function setViewport(
   client: Client,
-  viewport: DeviceMetrics = { width: 1, height: 1, scale: 1 },
+  viewport: DeviceMetrics = { width: 1, height: 1, scale: 1 }
 ): Promise<void> {
   const config: any = {
     deviceScaleFactor: 1,
@@ -24,8 +25,8 @@ export async function setViewport(
     scale: viewport.scale || 1,
     fitWindow: false, // as we cannot resize the window, `fitWindow: false` is needed in order for the viewport to be resizable
   }
-
-  const versionResult = await CDP.Version()
+  const { hostname, port } = url.parse((client as any).webSocketUrl)
+  const versionResult = await CDP.Version({ host: hostname, port })
   const isHeadless = versionResult['User-Agent'].includes('Headless')
 
   if (viewport.height && viewport.width) {

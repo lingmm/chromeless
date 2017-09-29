@@ -46,6 +46,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var path = require("path");
 var util = require("util");
+var url = require("url");
 var CDP = require("chrome-remote-interface");
 exports.version = (function () {
     if (fs.existsSync(path.join(__dirname, '../package.json'))) {
@@ -60,9 +61,9 @@ exports.version = (function () {
 function setViewport(client, viewport) {
     if (viewport === void 0) { viewport = { width: 1, height: 1, scale: 1 }; }
     return __awaiter(this, void 0, void 0, function () {
-        var config, versionResult, isHeadless, _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        var config, _a, hostname, port, versionResult, isHeadless, _b, _c;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
                     config = {
                         deviceScaleFactor: 1,
@@ -70,9 +71,10 @@ function setViewport(client, viewport) {
                         scale: viewport.scale || 1,
                         fitWindow: false,
                     };
-                    return [4 /*yield*/, CDP.Version()];
+                    _a = url.parse(client.webSocketUrl), hostname = _a.hostname, port = _a.port;
+                    return [4 /*yield*/, CDP.Version({ host: hostname, port: port })];
                 case 1:
-                    versionResult = _c.sent();
+                    versionResult = _d.sent();
                     isHeadless = versionResult['User-Agent'].includes('Headless');
                     if (!(viewport.height && viewport.width)) return [3 /*break*/, 2];
                     config.height = viewport.height;
@@ -85,24 +87,24 @@ function setViewport(client, viewport) {
                     config.width = 1440;
                     return [3 /*break*/, 6];
                 case 3:
-                    _a = config;
+                    _b = config;
                     return [4 /*yield*/, evaluate(client, (function () { return window.innerHeight; }).toString())];
                 case 4:
-                    _a.height = _c.sent();
-                    _b = config;
+                    _b.height = _d.sent();
+                    _c = config;
                     return [4 /*yield*/, evaluate(client, (function () { return window.innerWidth; }).toString())];
                 case 5:
-                    _b.width = _c.sent();
-                    _c.label = 6;
+                    _c.width = _d.sent();
+                    _d.label = 6;
                 case 6: return [4 /*yield*/, client.Emulation.setDeviceMetricsOverride(config)];
                 case 7:
-                    _c.sent();
+                    _d.sent();
                     return [4 /*yield*/, client.Emulation.setVisibleSize({
                             width: config.width,
                             height: config.height,
                         })];
                 case 8:
-                    _c.sent();
+                    _d.sent();
                     return [2 /*return*/];
             }
         });
